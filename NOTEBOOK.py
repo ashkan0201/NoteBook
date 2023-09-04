@@ -57,3 +57,12 @@ class REPOSITORY:
             with open(self.Json_File, mode = "w") as DATA:
                 json5.dump(self.Json_Data, DATA, indent = 4)
         return SAVE()
+
+"""
+This class is for displaying two modes of data.
+First mode: display all data stored in json.
+The second mode: displaying json data based on the received ID.
+"""
+class VIEW:
+    def __init__(self):
+        pass
