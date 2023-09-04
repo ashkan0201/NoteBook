@@ -91,3 +91,7 @@ class NOTEBOOK:
         self.REPO = REPOSITORY()
         self.VIEW = VIEW()
         self.REPO.CREATE()
+
+    # This function causes the GET_TITLE_AND_COMMENT function to be executed.
+    def ENTER_TITLE_AND_COMMENT(self):
+        self.REPO.GET_TITLE_AND_COMMENT()
