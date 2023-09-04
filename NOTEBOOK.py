@@ -10,3 +10,7 @@ class NOTE:
         self.TITLE = None
         self.COMMENT = None
         self.DEMO = {"Users":[]}
+
+class REPOSITORY:
+    def __init__(self):
+        pass
