@@ -34,3 +34,17 @@ class REPOSITORY:
         with open(self.Json_File, mode = "r") as DATA:
             LEN_DICT = json5.load(DATA)
             self.Note.ID = len(LEN_DICT["Users"])
+
+    """
+    GET_TITLE_AND_COMMENT function to get the ID created in 
+    the previous function and the title and comment from the user.
+    """
+    def GET_TITLE_AND_COMMENT(self):
+        self.GET_ID()
+        self.Note.TITLE = input("TITLE: ")
+        self.Note.COMMENT = input("COMMENT: ")
+        self.Json_Dict = {
+            "ID" : self.Note.ID,
+            "TITLE" : self.Note.TITLE,
+            "COMMENT" : self.Note.COMMENT
+        }
