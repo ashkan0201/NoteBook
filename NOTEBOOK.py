@@ -28,3 +28,9 @@ class REPOSITORY:
     def CREATE(self):
         with open(self.Json_File, mode = "w") as DATA:
             json5.dump(self.Note.DEMO, DATA)
+
+    # Creating the get_id tab to get each person's ID.
+    def GET_ID(self):
+        with open(self.Json_File, mode = "r") as DATA:
+            LEN_DICT = json5.load(DATA)
+            self.Note.ID = len(LEN_DICT["Users"])
