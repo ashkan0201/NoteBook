@@ -73,3 +73,14 @@ class VIEW:
         with open(self.Method.Json_File, mode = "r") as DATA:
             SHOW = json5.load(DATA)
         return SHOW
+    
+    # This function is to show the item based on ID.
+    def SHOW_WITH_ID(self, ID):
+        with open(self.Method.Json_File,  mode = "r") as DATA:
+            SHOW = json5.load(DATA)
+        try:
+            Result_Input = SHOW["Users"][int(ID)]
+        except:
+            print("Your entry is either incorrect or there is no such ID!")
+        else:
+            return Result_Input
