@@ -48,3 +48,12 @@ class REPOSITORY:
             "TITLE" : self.Note.TITLE,
             "COMMENT" : self.Note.COMMENT
         }
+
+        #save function to save the values ​​we got in the json file.
+        def SAVE():
+            with open(self.Json_File, mode = "r") as DATA:
+                self.Json_Data = json5.load(DATA)
+            self.Json_Data["Users"].append(self.Json_Dict)
+            with open(self.Json_File, mode = "w") as DATA:
+                json5.dump(self.Json_Data, DATA, indent = 4)
+        return SAVE()
