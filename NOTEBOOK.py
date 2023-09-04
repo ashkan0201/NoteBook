@@ -84,3 +84,10 @@ class VIEW:
             print("Your entry is either incorrect or there is no such ID!")
         else:
             return Result_Input
+
+# NOTEBOOK class is for creating and launching functions of previous classes.
+class NOTEBOOK:
+    def __init__(self):
+        self.REPO = REPOSITORY()
+        self.VIEW = VIEW()
+        self.REPO.CREATE()
