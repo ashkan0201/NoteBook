@@ -95,3 +95,7 @@ class NOTEBOOK:
     # This function causes the GET_TITLE_AND_COMMENT function to be executed.
     def ENTER_TITLE_AND_COMMENT(self):
         self.REPO.GET_TITLE_AND_COMMENT()
+
+    # This function causes a function to display all items in json.
+    def GIVE_ALL_ITEM(self):
+        return self.VIEW.SHOW_ALL()
