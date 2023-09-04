@@ -99,3 +99,7 @@ class NOTEBOOK:
     # This function causes a function to display all items in json.
     def GIVE_ALL_ITEM(self):
         return self.VIEW.SHOW_ALL()
+    
+    #This function causes a function to display all items in json based on ID.
+    def GIVE_ITEM_WITH_ID(self, ID):
+        return self.VIEW.SHOW_WITH_ID(ID)
