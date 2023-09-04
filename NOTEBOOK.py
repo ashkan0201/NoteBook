@@ -1,9 +1,9 @@
 # CB: ASHKAN
 
-# Add the desired library
+# Add the desired library.
 import json5
 
-# This class maintains a series of required values
+# This class maintains a series of required values.
 class NOTE:
     def __init__(self):
         self.ID = None
@@ -19,7 +19,12 @@ getting the title and comma, and saving information in the json file.
 class REPOSITORY:
     def __init__(self):
         self.Note = NOTE()
-        # The location of the address of the json file
+        # The location of the address of the json file.
         self.Json_File = "NoteBook.json"
         self.Json_Data = None
         self.Json_Dict = None
+
+    # Creating the create function to create a value in json.
+    def CREATE(self):
+        with open(self.Json_File, mode = "w") as DATA:
+            json5.dump(self.Note.DEMO, DATA)
