@@ -65,4 +65,5 @@ The second mode: displaying json data based on the received ID.
 """
 class VIEW:
     def __init__(self):
-        pass
+        self.Method = REPOSITORY()
+        self.Input_Id = None 
