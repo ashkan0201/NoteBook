@@ -18,4 +18,8 @@ getting the title and comma, and saving information in the json file.
 """
 class REPOSITORY:
     def __init__(self):
-        pass
+        self.Note = NOTE()
+        # The location of the address of the json file
+        self.Json_File = "NoteBook.json"
+        self.Json_Data = None
+        self.Json_Dict = None
