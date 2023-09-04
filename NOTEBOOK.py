@@ -49,7 +49,7 @@ class REPOSITORY:
             "COMMENT" : self.Note.COMMENT
         }
 
-        #save function to save the values ​​we got in the json file.
+        # save function to save the values ​​we got in the json file.
         def SAVE():
             with open(self.Json_File, mode = "r") as DATA:
                 self.Json_Data = json5.load(DATA)
@@ -67,3 +67,9 @@ class VIEW:
     def __init__(self):
         self.Method = REPOSITORY()
         self.Input_Id = None 
+
+    # This function shows all the items in the json file.
+    def SHOW_ALL(self):
+        with open(self.Method.Json_File, mode = "r") as DATA:
+            SHOW = json5.load(DATA)
+        return SHOW
