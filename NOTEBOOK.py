@@ -11,6 +11,11 @@ class NOTE:
         self.COMMENT = None
         self.DEMO = {"Users":[]}
 
+"""
+Using the previous class, 
+this class performs the main tasks such as creating a json file and generating an ID, 
+getting the title and comma, and saving information in the json file.
+"""
 class REPOSITORY:
     def __init__(self):
         pass
