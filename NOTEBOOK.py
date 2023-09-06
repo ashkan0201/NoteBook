@@ -7,7 +7,7 @@ import json5
 # This class maintains a series of required values.
 class NOTE:
     def __init__(self):
-        self.ID = None
+        self.ID = 0
         self.TITLE = None
         self.COMMENT = None
         self.DEMO = {"Users":[]}
@@ -35,8 +35,11 @@ class REPOSITORY:
     # Creating the get_id tab to get each person's ID.
     def GET_ID(self):
         with open(self.Json_File, mode = "r") as DATA:
-            LEN_DICT = json5.load(DATA)
-            self.Note.ID = len(LEN_DICT["Users"])
+            Json_ID = json5.load(DATA)
+            try:
+                self.Note.ID = Json_ID["Users"][-1]["ID"]+1
+            except:
+                pass
 
     """
     GET_TITLE_AND_COMMENT function to get the ID created in 
@@ -74,12 +77,16 @@ class REPOSITORY:
             self.Json_Remove["Users"] = []
             with open(self.Json_File, mode = "w") as DATA:
                 json5.dump(self.Json_Remove, DATA, indent = 4)
+                self.Note.ID += 1
             return self.Json_Remove
 
         # If it was with Idi
         elif WITH_ID != None:
+            LIST_OF_ID = []
             try:
-                if self.Json_Remove["Users"][-1]["ID"] < WITH_ID:
+                for everything in self.Json_Remove["Users"]:
+                    LIST_OF_ID.append(everything["ID"])
+                if WITH_ID not in LIST_OF_ID:
                     raise
 
                 for everything in self.Json_Remove["Users"]:
@@ -103,22 +110,29 @@ class VIEW:
         self.Method = REPOSITORY()
         self.Input_Id = None 
 
-    # This function shows all the items in the json file.
-    def SHOW_ALL(self):
+    # This function shows the items in two modes, one without ID, which includes all items, and the other with ID.
+    def SHOW_ALL(self, WITH_ID):
         with open(self.Method.Json_File, mode = "r") as DATA:
             SHOW = json5.load(DATA)
-        return SHOW
-
-    # This function is to show the item based on ID.
-    def SHOW_WITH_ID(self, ID):
-        with open(self.Method.Json_File,  mode = "r") as DATA:
-            SHOW = json5.load(DATA)
-        try:
-            Result_Input = SHOW["Users"][int(ID)]
-        except:
-            print("Your entry is either incorrect or there is no such ID!")
-        else:
-            return Result_Input
+            
+        # This function shows all the items in the json file.
+        if WITH_ID == None:
+            return SHOW
+        
+        # This function is to show the item based on ID.
+        elif WITH_ID != None:
+            try:
+                LIST_OF_ID_V = []
+                for everything in SHOW["Users"]:
+                    LIST_OF_ID_V.append(everything["ID"])
+                    if everything["ID"] == int(WITH_ID):
+                        Result_Input = everything
+                if WITH_ID not in LIST_OF_ID_V:
+                    raise
+            except:
+                print("Your entry is either incorrect or there is no such ID!")
+            else:
+                return Result_Input
 
 # NOTEBOOK class is for creating and launching functions of previous classes.
 class NOTEBOOK:
@@ -128,16 +142,12 @@ class NOTEBOOK:
         self.REPO.CREATE()
 
     # This function causes the GET_TITLE_AND_COMMENT function to be executed.
-    def ENTER_TITLE_AND_COMMENT(self):
+    def ENTER_ITEM(self):
         self.REPO.GET_TITLE_AND_COMMENT()
 
     # This function causes a function to display all items in json.
-    def GIVE_ALL_ITEM(self):
-        return self.VIEW.SHOW_ALL()
-
-    # This function causes a function to display all items in json based on ID.
-    def GIVE_ITEM_WITH_ID(self, ID):
-        return self.VIEW.SHOW_WITH_ID(ID)
+    def GIVE_ALL_ITEM(self, WITH_ID = None):
+        return self.VIEW.SHOW_ALL(WITH_ID)
 
     # This function executes the REMOVE_ITEM function
     def REMOVING_ITEM(self, WITH_ID = None):
