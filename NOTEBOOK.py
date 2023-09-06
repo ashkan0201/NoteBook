@@ -62,22 +62,22 @@ class REPOSITORY:
         return SAVE()
 
     # REMOVE_ITEM function to delete values ​​or all items or delete with ID
-    def REMOVE_ITEM(self, WITH_IF):
+    def REMOVE_ITEM(self, WITH_ID):
         self.DEL_ITEM_WITH_ID = None
-        
+
         with open(self.Json_File, mode = "r") as DATA:
             self.Json_Remove = json5.load(DATA)
 
         # If it was without ID
-        if WITH_IF == None:
+        if WITH_ID == None:
             self.Json_Remove["Users"] = []
             with open(self.Json_File, mode = "w") as DATA:
                 json5.dump(self.Json_Remove, DATA, indent = 4)
             return self.Json_Remove
 
         # If it was with Idi
-        elif WITH_IF != None:
-            self.DEL_ITEM_WITH_ID = self.Json_Remove["Users"].pop(WITH_IF)
+        elif WITH_ID != None:
+            self.DEL_ITEM_WITH_ID = self.Json_Remove["Users"].pop(WITH_ID)
             return self.DEL_ITEM_WITH_ID
 
 """
@@ -125,6 +125,10 @@ class NOTEBOOK:
     # This function causes a function to display all items in json based on ID.
     def GIVE_ITEM_WITH_ID(self, ID):
         return self.VIEW.SHOW_WITH_ID(ID)
+
+    # This function executes the REMOVE_ITEM function
+    def REMOVING_ITEM(self, WITH_ID = None):
+        return self.REPO.REMOVE_ITEM(WITH_ID)
 
 if __name__ == '__main__':
     FINAL = NOTEBOOK()
