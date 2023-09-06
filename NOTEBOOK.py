@@ -7,7 +7,7 @@ import json5
 # This class maintains a series of required values.
 class NOTE:
     def __init__(self):
-        self.ID = 0
+        self.DEMO_ID = -1
         self.TITLE = None
         self.COMMENT = None
         self.DEMO = {"Users":[]}
@@ -32,25 +32,16 @@ class REPOSITORY:
         with open(self.Json_File, mode = "w") as DATA:
             json5.dump(self.Note.DEMO, DATA)
 
-    # Creating the get_id tab to get each person's ID.
-    def GET_ID(self):
-        with open(self.Json_File, mode = "r") as DATA:
-            Json_ID = json5.load(DATA)
-            try:
-                self.Note.ID = Json_ID["Users"][-1]["ID"]+1
-            except:
-                pass
-
     """
     GET_TITLE_AND_COMMENT function to get the ID created in 
     the previous function and the title and comment from the user.
     """
     def GET_TITLE_AND_COMMENT(self):
-        self.GET_ID()
+        self.Note.DEMO_ID += 1
         self.Note.TITLE = input("TITLE: ")
         self.Note.COMMENT = input("COMMENT: ")
         self.Json_Dict = {
-            "ID" : self.Note.ID,
+            "ID" : self.Note.DEMO_ID,
             "TITLE" : self.Note.TITLE,
             "COMMENT" : self.Note.COMMENT,
             "REGISTRATION_TIME" :  datetime.today().ctime()
@@ -67,18 +58,18 @@ class REPOSITORY:
 
     # REMOVE_ITEM function to delete values ​​or all items or delete with ID
     def REMOVE_ITEM(self, WITH_ID):
+        self.DEL_ITEM = None
         self.DEL_ITEM_WITH_ID = None
 
         with open(self.Json_File, mode = "r") as DATA:
             self.Json_Remove = json5.load(DATA)
+            self.DEL_ITEM = self.Json_Remove
 
         # If it was without ID
         if WITH_ID == None:
-            self.Json_Remove["Users"] = []
             with open(self.Json_File, mode = "w") as DATA:
-                json5.dump(self.Json_Remove, DATA, indent = 4)
-                self.Note.ID += 1
-            return self.Json_Remove
+                json5.dump(self.Note.DEMO, DATA, indent = 4)
+            return self.DEL_ITEM
 
         # If it was with Idi
         elif WITH_ID != None:
