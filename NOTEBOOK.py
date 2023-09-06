@@ -78,6 +78,8 @@ class REPOSITORY:
         # If it was with Idi
         elif WITH_ID != None:
             self.DEL_ITEM_WITH_ID = self.Json_Remove["Users"].pop(WITH_ID)
+            with open(self.Json_File, mode = "w") as DATA:
+                json5.dump(self.Json_Remove, DATA, indent = 4)
             return self.DEL_ITEM_WITH_ID
 
 """
