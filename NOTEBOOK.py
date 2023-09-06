@@ -25,6 +25,7 @@ class REPOSITORY:
         self.Json_Data = None
         self.Json_Dict = None
         self.Json_Remove = None
+        self.Json_Remove_Index = None
 
     # Creating the create function to create a value in json.
     def CREATE(self):
@@ -78,9 +79,14 @@ class REPOSITORY:
         # If it was with Idi
         elif WITH_ID != None:
             try:
-                self.DEL_ITEM_WITH_ID = self.Json_Remove["Users"].pop(WITH_ID)
-                with open(self.Json_File, mode = "w") as DATA:
-                    json5.dump(self.Json_Remove, DATA, indent = 4)
+                for everything in self.Json_Remove["Users"]:
+                    if everything["ID"] == WITH_ID:
+                        self.Json_Remove_Index = self.Json_Remove["Users"].index(everything)
+                        self.DEL_ITEM_WITH_ID = self.Json_Remove["Users"].pop(self.Json_Remove_Index)
+                        with open(self.Json_File, mode = "w") as DATA:
+                            json5.dump(self.Json_Remove, DATA, indent = 4)
+                    else:
+                        raise
             except:
                 print("This ID does not exist!")
             else:
