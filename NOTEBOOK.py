@@ -77,10 +77,14 @@ class REPOSITORY:
 
         # If it was with Idi
         elif WITH_ID != None:
-            self.DEL_ITEM_WITH_ID = self.Json_Remove["Users"].pop(WITH_ID)
-            with open(self.Json_File, mode = "w") as DATA:
-                json5.dump(self.Json_Remove, DATA, indent = 4)
-            return self.DEL_ITEM_WITH_ID
+            try:
+                self.DEL_ITEM_WITH_ID = self.Json_Remove["Users"].pop(WITH_ID)
+                with open(self.Json_File, mode = "w") as DATA:
+                    json5.dump(self.Json_Remove, DATA, indent = 4)
+            except:
+                print("This ID does not exist!")
+            else:
+                return self.DEL_ITEM_WITH_ID
 
 """
 This class is for displaying two modes of data.
