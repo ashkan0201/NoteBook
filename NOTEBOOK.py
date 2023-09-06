@@ -60,9 +60,25 @@ class REPOSITORY:
             with open(self.Json_File, mode = "w") as DATA:
                 json5.dump(self.Json_Data, DATA, indent = 4)
         return SAVE()
+
+    # REMOVE_ITEM function to delete values ​​or all items or delete with ID
     def REMOVE_ITEM(self, WITH_IF):
-        pass
-            
+        self.DEL_ITEM_WITH_ID = None
+        
+        with open(self.Json_File, mode = "r") as DATA:
+            self.Json_Remove = json5.load(DATA)
+
+        # If it was without ID
+        if WITH_IF == None:
+            self.Json_Remove["Users"] = []
+            with open(self.Json_File, mode = "w") as DATA:
+                json5.dump(self.Json_Remove, DATA, indent = 4)
+            return self.Json_Remove
+
+        # If it was with Idi
+        elif WITH_IF != None:
+            self.DEL_ITEM_WITH_ID = self.Json_Remove["Users"].pop(WITH_IF)
+            return self.DEL_ITEM_WITH_ID
 
 """
 This class is for displaying two modes of data.
@@ -79,7 +95,7 @@ class VIEW:
         with open(self.Method.Json_File, mode = "r") as DATA:
             SHOW = json5.load(DATA)
         return SHOW
-    
+
     # This function is to show the item based on ID.
     def SHOW_WITH_ID(self, ID):
         with open(self.Method.Json_File,  mode = "r") as DATA:
@@ -105,10 +121,10 @@ class NOTEBOOK:
     # This function causes a function to display all items in json.
     def GIVE_ALL_ITEM(self):
         return self.VIEW.SHOW_ALL()
-    
+
     # This function causes a function to display all items in json based on ID.
     def GIVE_ITEM_WITH_ID(self, ID):
         return self.VIEW.SHOW_WITH_ID(ID)
-    
+
 if __name__ == '__main__':
     FINAL = NOTEBOOK()
