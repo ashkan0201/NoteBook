@@ -107,4 +107,4 @@ class NOTEBOOK:
         return self.VIEW.SHOW_WITH_ID(ID)
     
 if __name__ == '__main__':
-    FINAL = REPOSITORY()
+    FINAL = NOTEBOOK()
