@@ -1,7 +1,7 @@
 # CB: ASHKAN
 
 # Add the desired library.
-from datetime import datetiem   
+from datetime import datetime   
 import json5
 
 # This class maintains a series of required values.
@@ -47,7 +47,8 @@ class REPOSITORY:
         self.Json_Dict = {
             "ID" : self.Note.ID,
             "TITLE" : self.Note.TITLE,
-            "COMMENT" : self.Note.COMMENT
+            "COMMENT" : self.Note.COMMENT,
+            "REGISTRATION_TIME" :  datetime.today().ctime()
         }
 
         # save function to save the values ​​we got in the json file.
