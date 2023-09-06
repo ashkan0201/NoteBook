@@ -79,14 +79,15 @@ class REPOSITORY:
         # If it was with Idi
         elif WITH_ID != None:
             try:
+                if self.Json_Remove["Users"][-1]["ID"] < WITH_ID:
+                    raise
+
                 for everything in self.Json_Remove["Users"]:
                     if everything["ID"] == WITH_ID:
                         self.Json_Remove_Index = self.Json_Remove["Users"].index(everything)
                         self.DEL_ITEM_WITH_ID = self.Json_Remove["Users"].pop(self.Json_Remove_Index)
                         with open(self.Json_File, mode = "w") as DATA:
                             json5.dump(self.Json_Remove, DATA, indent = 4)
-                    else:
-                        raise
             except:
                 print("This ID does not exist!")
             else:
