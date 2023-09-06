@@ -24,6 +24,7 @@ class REPOSITORY:
         self.Json_File = "NoteBook.json"
         self.Json_Data = None
         self.Json_Dict = None
+        self.Json_Remove = None
 
     # Creating the create function to create a value in json.
     def CREATE(self):
@@ -59,6 +60,9 @@ class REPOSITORY:
             with open(self.Json_File, mode = "w") as DATA:
                 json5.dump(self.Json_Data, DATA, indent = 4)
         return SAVE()
+    def REMOVE_ITEM(self, WITH_IF):
+        pass
+            
 
 """
 This class is for displaying two modes of data.
