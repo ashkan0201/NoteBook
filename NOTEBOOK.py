@@ -138,10 +138,12 @@ class NoteBook:
 
     # This function causes a function to display all items in json.
     def Give_Item(self, With_ID = None):
+        """By giving a numerical value to With_ID, calculations can be checked based on that ID"""
         return self.View.Show_All(With_ID)
 
     # This function executes the Remove_Item function
     def Removing_Item(self, With_ID = None):
+        """By giving a numerical value to With_ID, calculations can be checked based on that ID"""
         return self.Repo.Remove_Item(With_ID)
 
 if __name__ == '__main__':
