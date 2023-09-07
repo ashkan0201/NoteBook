@@ -5,21 +5,21 @@ from datetime import datetime
 import json5
 
 # This class maintains a series of required values.
-class NOTE:
+class Note:
     def __init__(self):
-        self.DEMO_ID = -1
-        self.TITLE = None
-        self.COMMENT = None
-        self.DEMO = {"Users":[]}
+        self.Demo_ID = -1
+        self.Title = None
+        self.Comment = None
+        self.Demo = {"Users":[]}
 
 """
 Using the previous class, 
 this class performs the main tasks such as creating a json file and generating an ID, 
-getting the title and comma, and saving information in the json file.
+getting the Title and comma, and saving information in the json file.
 """
-class REPOSITORY:
+class Repository:
     def __init__(self):
-        self.Note = NOTE()
+        self.Note = Note()
         # The location of the address of the json file.
         self.Json_File = "NoteBook.json"
         self.Json_Data = None
@@ -27,122 +27,122 @@ class REPOSITORY:
         self.Json_Remove = None
         self.Json_Remove_Index = None
 
-    # Creating the create function to create a value in json.
-    def CREATE(self):
-        with open(self.Json_File, mode = "w") as DATA:
-            json5.dump(self.Note.DEMO, DATA)
+    # Creating the Create function to Create a value in json.
+    def Create(self):
+        with open(self.Json_File, mode = "w") as Data:
+            json5.dump(self.Note.Demo, Data)
 
     """
-    GET_TITLE_AND_COMMENT function to get the ID created in 
-    the previous function and the title and comment from the user.
+    Get_Title_And_Comment function to get the ID Created in 
+    the previous function and the Title and Comment from the user.
     """
-    def GET_TITLE_AND_COMMENT(self):
-        self.Note.DEMO_ID += 1
-        self.Note.TITLE = input("TITLE: ")
-        self.Note.COMMENT = input("COMMENT: ")
+    def Get_Title_And_Comment(self):
+        self.Note.Demo_ID += 1
+        self.Note.Title = input("Title: ")
+        self.Note.Comment = input("Comment: ")
         self.Json_Dict = {
-            "ID" : self.Note.DEMO_ID,
-            "TITLE" : self.Note.TITLE,
-            "COMMENT" : self.Note.COMMENT,
-            "REGISTRATION_TIME" :  datetime.today().ctime()
+            "ID" : self.Note.Demo_ID,
+            "Title" : self.Note.Title,
+            "Comment" : self.Note.Comment,
+            "Registration_Time" :  datetime.today().ctime()
         }
 
-        # save function to save the values ​​we got in the json file.
-        def SAVE():
-            with open(self.Json_File, mode = "r") as DATA:
-                self.Json_Data = json5.load(DATA)
+        # Save function to Save the values ​​we got in the json file.
+        def Save():
+            with open(self.Json_File, mode = "r") as Data:
+                self.Json_Data = json5.load(Data)
             self.Json_Data["Users"].append(self.Json_Dict)
-            with open(self.Json_File, mode = "w") as DATA:
-                json5.dump(self.Json_Data, DATA, indent = 4)
-        return SAVE()
+            with open(self.Json_File, mode = "w") as Data:
+                json5.dump(self.Json_Data, Data, indent = 4)
+        return Save()
 
-    # REMOVE_ITEM function to delete values ​​or all items or delete with ID
-    def REMOVE_ITEM(self, WITH_ID):
-        self.DEL_ITEM = None
-        self.DEL_ITEM_WITH_ID = None
+    # Remove_Item function to delete values ​​or all items or delete with ID
+    def Remove_Item(self, With_ID):
+        self.Del_Item = None
+        self.Del_Item_With_ID = None
 
-        with open(self.Json_File, mode = "r") as DATA:
-            self.Json_Remove = json5.load(DATA)
-            self.DEL_ITEM = self.Json_Remove
+        with open(self.Json_File, mode = "r") as Data:
+            self.Json_Remove = json5.load(Data)
+            self.Del_Item = self.Json_Remove
 
         # If it was without ID
-        if WITH_ID == None:
-            with open(self.Json_File, mode = "w") as DATA:
-                json5.dump(self.Note.DEMO, DATA, indent = 4)
-            return self.DEL_ITEM
+        if With_ID == None:
+            with open(self.Json_File, mode = "w") as Data:
+                json5.dump(self.Note.Demo, Data, indent = 4)
+            return self.Del_Item
 
         # If it was with Idi
-        elif WITH_ID != None:
-            LIST_OF_ID = []
+        elif With_ID != None:
+            List_Of_ID = []
             try:
                 for everything in self.Json_Remove["Users"]:
-                    LIST_OF_ID.append(everything["ID"])
-                if WITH_ID not in LIST_OF_ID:
+                    List_Of_ID.append(everything["ID"])
+                if With_ID not in List_Of_ID:
                     raise
 
                 for everything in self.Json_Remove["Users"]:
-                    if everything["ID"] == WITH_ID:
+                    if everything["ID"] == With_ID:
                         self.Json_Remove_Index = self.Json_Remove["Users"].index(everything)
-                        self.DEL_ITEM_WITH_ID = self.Json_Remove["Users"].pop(self.Json_Remove_Index)
-                        with open(self.Json_File, mode = "w") as DATA:
-                            json5.dump(self.Json_Remove, DATA, indent = 4)
+                        self.Del_Item_With_ID = self.Json_Remove["Users"].pop(self.Json_Remove_Index)
+                        with open(self.Json_File, mode = "w") as Data:
+                            json5.dump(self.Json_Remove, Data, indent = 4)
             except:
                 print("This ID does not exist!")
             else:
-                return self.DEL_ITEM_WITH_ID
+                return self.Del_Item_With_ID
 
 """
-This class is for displaying two modes of data.
-First mode: display all data stored in json.
-The second mode: displaying json data based on the received ID.
+This class is for displaying two modes of Data.
+First mode: display all Data stored in json.
+The second mode: displaying json Data based on the received ID.
 """
-class VIEW:
+class View:
     def __init__(self):
-        self.Method = REPOSITORY()
+        self.Method = Repository()
         self.Input_Id = None 
 
-    # This function shows the items in two modes, one without ID, which includes all items, and the other with ID.
-    def SHOW_ALL(self, WITH_ID):
-        with open(self.Method.Json_File, mode = "r") as DATA:
-            SHOW = json5.load(DATA)
+    # This function Shows the items in two modes, one without ID, which includes all items, and the other with ID.
+    def Show_All(self, With_ID):
+        with open(self.Method.Json_File, mode = "r") as Data:
+            Show = json5.load(Data)
             
-        # This function shows all the items in the json file.
-        if WITH_ID == None:
-            return SHOW
+        # This function Shows all the items in the json file.
+        if With_ID == None:
+            return Show
         
-        # This function is to show the item based on ID.
-        elif WITH_ID != None:
+        # This function is to Show the item based on ID.
+        elif With_ID != None:
             try:
-                LIST_OF_ID_V = []
-                for everything in SHOW["Users"]:
-                    LIST_OF_ID_V.append(everything["ID"])
-                    if everything["ID"] == int(WITH_ID):
+                List_Of_ID_V = []
+                for everything in Show["Users"]:
+                    List_Of_ID_V.append(everything["ID"])
+                    if everything["ID"] == int(With_ID):
                         Result_Input = everything
-                if WITH_ID not in LIST_OF_ID_V:
+                if With_ID not in List_Of_ID_V:
                     raise
             except:
                 print("Your entry is either incorrect or there is no such ID!")
             else:
                 return Result_Input
 
-# NOTEBOOK class is for creating and launching functions of previous classes.
-class NOTEBOOK:
+# NoteBook class is for creating and launching functions of previous classes.
+class NoteBook:
     def __init__(self):
-        self.REPO = REPOSITORY()
-        self.VIEW = VIEW()
-        self.REPO.CREATE()
+        self.Repo = Repository()
+        self.View = View()
+        self.Repo.Create()
 
-    # This function causes the GET_TITLE_AND_COMMENT function to be executed.
-    def ENTER_ITEM(self):
-        self.REPO.GET_TITLE_AND_COMMENT()
+    # This function causes the Get_Title_And_Comment function to be executed.
+    def Enter_Item(self):
+        self.Repo.Get_Title_And_Comment()
 
     # This function causes a function to display all items in json.
-    def GIVE_ALL_ITEM(self, WITH_ID = None):
-        return self.VIEW.SHOW_ALL(WITH_ID)
+    def Give_Item(self, With_ID = None):
+        return self.View.Show_All(With_ID)
 
-    # This function executes the REMOVE_ITEM function
-    def REMOVING_ITEM(self, WITH_ID = None):
-        return self.REPO.REMOVE_ITEM(WITH_ID)
+    # This function executes the Remove_Item function
+    def Removing_Item(self, With_ID = None):
+        return self.Repo.Remove_Item(With_ID)
 
 if __name__ == '__main__':
-    FINAL = NOTEBOOK()
+    Final = NoteBook()
