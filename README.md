@@ -9,3 +9,18 @@ Then we Save the values ​​to a json file.
 
 The user must be able to see the content inside the file, so we have put functions that are two modes of displaying the content inside json.
 One in general and one with ID entry.
+
+## Installation
+```bash
+    $ pip install json5
+```
+or
+```bash
+    $ pip install -r requirements.txt
+```
+
+## My information
+
+Email me if you see a bug:
+
+- ashkan0211@gmail.com
